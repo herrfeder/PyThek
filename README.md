@@ -8,3 +8,5 @@ Features:
           
 At latest point of developement, I was struggling around with ffmpeg and ffpyplayer.
 They wasn't able to play streams directly. If someone knows this issues and has advisory, I would be grateful.
+
+Overall it could give some good examples for using Kivy.
