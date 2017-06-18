@@ -1,0 +1,161 @@
+#:import BoxLayout kivy.uix.boxlayout.BoxLayout
+#:import SelectableView kivy.uix.selectableview.SelectableView
+#:import GridLayout kivy.uix.gridlayout.GridLayout
+#:import ButtonBehavior kivy.uix.behaviors.ButtonBehavior
+#:import ScrollView kivy.uix.scrollview
+
+WeatherRoot:
+
+<WeatherRoot>:
+	carousel: carousel
+	channels: channels
+	searching: searching
+	storage: storage
+	start: start
+	statuslabel: statuslabel
+	BoxLayout:
+		orientation: "vertical"
+		ActionBar:
+			ActionView:
+				use_seperator:True
+				ActionPrevious:
+					app_icon: "staticImages/ard.png"
+					with_previous: False
+				ActionLabel:
+					id: statuslabel
+					text: ""
+				ActionOverflow:
+					ActionButton:
+						text: "Search"
+				ActionButton:
+					text: "Channels"
+					on_press: app.root.show_channels()
+				ActionButton:
+					text: "Searching"
+					on_press: app.root.show_searching()
+				ActionButton:
+					text: "Storage"
+					on_press: app.root.show_storage()
+
+
+		Carousel:
+			id: carousel
+			Channels:
+				id: channels
+			Searching:
+				id: searching
+			Storage:
+				id: storage
+			Start:
+				id: start
+
+
+<Searching>:
+	orientation: "vertical"
+	#pos: root.x,root.y
+	#set value of the property search_input
+	search_input: search_box
+	#size_hint_y: 0 will move it down
+        #channelselect: channelselect
+	GridLayout:
+		height: "80dp"
+		rows: 2
+		#ScrollView:
+		#	do_scroll_x: True
+		#	do_scroll_y: False
+		#	height: "40p"
+		#	id: channelselect
+		BoxLayout:
+			height: "40dp"
+			size_hint_y: None
+			TextInput:
+				id: search_box
+				multiline: False
+				focus: True
+				on_text_validate: root.search_query()
+				#size_hint_x: 80
+
+
+<PyThekVideoPlayer>:
+	orientation: "vertical"
+	pyplayer: template_player
+	GridLayout:
+		rows: 2
+		cols: 2
+		Label:
+			text: "test"
+		Label:
+			text: "test"
+		Label:
+			text: "test"
+		Label:
+			text: "test"
+	VideoPlayer:
+		id: template_player
+		source: root.url
+		state: root.state
+		options: root.options
+		#on_press: root.player_resize	
+
+<CascadingView@AnchorLayout>:
+	left_box: leftcasc
+	middle_box: middlecasc
+	right_box: rightcasc
+	pos_hint: {"x":0,"y":0}
+	size_hint_y: "80dp"
+	size_hint_x: root.size_hint_x
+	height: "400dp"
+	anchor_y: "top"
+	opacity: .75
+	GridLayout:
+		cols: 3
+		#spacing: 10
+		LeftCasc:
+			id:leftcasc
+		#	pos:root.x,root.y
+		MiddleCasc:
+			id:middlecasc
+		#	pos:root.x,root.y
+		RightCasc:
+			id:rightcasc
+		#	pos:root.x,root.y
+
+<LeftCasc@BoxLayout>
+<MiddleCasc@BoxLayout>
+<RightCasc@BoxLayout>
+
+<Channels>:
+	orientation: "vertical"
+	Label:
+		text: "Channels"
+
+<Storage@FloatLayout>:
+	orientation: "vertical"
+	left_box: leftcasc
+	middle_box: middlecasc
+	right_box: rightcasc
+	download_table: download_table
+	GridLayout:
+		rows: 2
+		BoxLayout:
+			padding: 20,10,10,20
+			#size_hint_x: root.size_hint_x
+			id: download_table
+			orientation: "vertical"
+		GridLayout:
+			cols: 3
+			#spacing: 10
+			LeftCasc:
+				id:leftcasc
+			MiddleCasc:
+				id:middlecasc
+			RightCasc:
+				id:rightcasc
+
+
+<Start>:
+	orientation: "vertical"
+	Label:
+		text: "START"
+
+
